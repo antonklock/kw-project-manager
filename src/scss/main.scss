@@ -1,0 +1,25 @@
+div {
+    // background-color: pink;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    flex-grow: 1;
+}
+
+.menu {
+    // background-color: blue;
+    min-width: 300px;
+    max-width: 300px;
+    flex: 1;
+    border-right: 1px solid rgb(50, 50, 50);
+}
+
+.projects{
+    width: 100vw;
+    min-width: 600px;
+    display: flex;
+    flex-direction: column;
+}

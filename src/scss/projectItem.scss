@@ -1,0 +1,11 @@
+@use '../scss/globalVariables.scss';
+
+.projectItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 60px;
+    background-color: rgb(25, 25, 31);
+    border-radius: globalVariables.$borderRadius;
+}
