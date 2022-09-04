@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
-import { Button, Avatar } from "@mui/joy";
+import { Avatar } from "@mui/joy";
 import { useColorScheme } from "@mui/joy/styles";
-import "../scss/main.scss";
-import ProjectItem from "./projectItem";
+import "../scss/components/main.scss";
+import MenuButton from "./MenuButton";
+import ProjectsView from "../components/views/ProjectsView";
 
 const Main = () => {
   const { mode, setMode } = useColorScheme();
@@ -11,15 +11,17 @@ const Main = () => {
   return (
     <div className="main">
       <div className="menu">
-        <Avatar />
-        <Button> New Project </Button>
+        <div>
+          <Avatar />
+        </div>
+        <div className="menuButtonsWrapper">
+          <MenuButton />
+          <MenuButton />
+          <MenuButton />
+        </div>
       </div>
-      <div className="projects">
-        <Button className=""> New Project </Button>
-        <ProjectItem />
-        <ProjectItem />
-        <ProjectItem />
-        <ProjectItem />
+      <div className="views">
+        <ProjectsView />
       </div>
     </div>
   );

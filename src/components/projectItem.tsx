@@ -1,16 +1,39 @@
 import React from "react";
-import "../scss/projectItem.scss";
+import "../scss/components/projectItem.scss";
+import {
+  Card,
+  CardOverflow,
+  CardContent,
+  Typography,
+  IconButton,
+} from "@mui/joy";
+import StarIcon from "@mui/icons-material/Star";
 
 const ProjectItem = () => {
   return (
-    <div className="projectItem">
-      <p>Star</p>
-      <p>Icon</p>
-      <p>Project name</p>
-      <p>Project path</p>
-      <p>ClickUp link</p>
-      <p>Settings</p>
-    </div>
+    <>
+      <Card
+        row
+        variant="outlined"
+        sx={{
+          bgcolor: "background.body",
+          zIndex: -1,
+        }}
+        className="projectItem"
+      >
+        <CardOverflow>
+          <IconButton aria-label="Star project">
+            <StarIcon />
+          </IconButton>
+        </CardOverflow>
+        <CardContent>
+          <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
+            Project Name
+          </Typography>
+          <Typography level="body2">Project subtitle</Typography>
+        </CardContent>
+      </Card>
+    </>
   );
 };
 
