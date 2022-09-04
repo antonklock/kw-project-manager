@@ -7,5 +7,10 @@
     justify-content: space-around;
     background-color: rgb(35, 35, 45);
     border-radius: globalVariables.$borderRadius;
-    margin: 4px 30px;
+    margin: 10px 30px;
+}
+
+.projectItem .cardPart:first-child{
+    margin-left: 5px;
+    margin-right: 15px;
 }

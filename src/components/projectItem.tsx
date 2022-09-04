@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../scss/components/projectItem.scss";
 import {
   Card,
@@ -6,32 +6,53 @@ import {
   CardContent,
   Typography,
   IconButton,
+  Button,
 } from "@mui/joy";
+import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-const ProjectItem = () => {
+type ChildProps = {
+  handleDelete: (keyToDelete: string) => void;
+  id: string;
+};
+
+const ProjectItem = (props: ChildProps) => {
+  const { handleDelete, id } = props;
+  const [checked, setChecked] = useState(false);
   return (
     <>
-      <Card
-        row
-        variant="outlined"
-        sx={{
-          bgcolor: "background.body",
-          zIndex: -1,
-        }}
-        className="projectItem"
-      >
-        <CardOverflow>
-          <IconButton aria-label="Star project">
-            <StarIcon />
+      <Card row variant="outlined" className="projectItem">
+        <CardOverflow className="cardPart">
+          <IconButton
+            aria-label="Star project"
+            variant="plain"
+            onClick={() => setChecked(!checked)}
+          >
+            {checked ? <StarIcon /> : <StarBorderIcon />}
           </IconButton>
         </CardOverflow>
-        <CardContent>
+
+        <CardContent className="cardPart">
           <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
             Project Name
           </Typography>
-          <Typography level="body2">Project subtitle</Typography>
+          <Typography level="body2"> {id} </Typography>
         </CardContent>
+
+        <CardContent className="cardPart">
+          <Link fontWeight="sm">path/path/path/path/path/path</Link>
+        </CardContent>
+
+        <Button
+          variant="solid"
+          color="danger"
+          onClick={() => {
+            handleDelete(id);
+          }}
+        >
+          Delete
+        </Button>
       </Card>
     </>
   );

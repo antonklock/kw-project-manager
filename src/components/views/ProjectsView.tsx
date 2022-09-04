@@ -2,6 +2,7 @@ import React from "react";
 import { Button, TextField, Typography, Sheet } from "@mui/joy";
 import ProjectItems from "../ProjectItems";
 import "../../scss/components/views/projectViews.scss";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const ProjectsView = () => {
   return (
@@ -22,15 +23,22 @@ const ProjectsView = () => {
           <TextField placeholder="Search" />
         </div>
         <Sheet className="filterBar" variant="soft">
-          <p>Star</p>
+          <Button
+            variant="plain"
+            sx={{
+              background: "none",
+            }}
+          >
+            <KeyboardArrowDownIcon /> Star
+          </Button>
           <p>Name</p>
-          <p>Name</p>
-          <p>Name</p>
-          <p>Name</p>
-          <p>Name</p>
+          <p>Path</p>
+          <p>Settings</p>
         </Sheet>
       </div>
-      <ProjectItems />
+      <div className="projectItems">
+        <ProjectItems />
+      </div>
     </>
   );
 };

@@ -1,14 +1,15 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Main from "./components/Main";
+import { createRoot } from "react-dom/client";
 
 function render() {
-  ReactDOM.render(
+  const container = document.getElementById("app");
+  const root = createRoot(container);
+  root.render(
     <CssVarsProvider>
       <Main />
-    </CssVarsProvider>,
-    document.body
+    </CssVarsProvider>
   );
 }
 
