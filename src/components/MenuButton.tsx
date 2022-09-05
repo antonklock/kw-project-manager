@@ -1,11 +1,17 @@
 import React from "react";
 import { Button } from "@mui/joy";
+import "../scss/components/menuButton.scss";
 
-const MenuButton = () => {
+type MenuButtonProps = {
+  text: string;
+};
+
+const MenuButton = (props: MenuButtonProps) => {
+  const { text } = props;
   return (
-    <>
-      <Button> Menu button </Button>
-    </>
+    <div className="menuButton">
+      <Button color="primary">{text}</Button>
+    </div>
   );
 };
 

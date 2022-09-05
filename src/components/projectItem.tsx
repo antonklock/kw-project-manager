@@ -15,10 +15,11 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 type ChildProps = {
   handleDelete: (keyToDelete: string) => void;
   id: string;
+  path: string;
 };
 
 const ProjectItem = (props: ChildProps) => {
-  const { handleDelete, id } = props;
+  const { handleDelete, id, path } = props;
   const [checked, setChecked] = useState(false);
   return (
     <>
@@ -41,13 +42,14 @@ const ProjectItem = (props: ChildProps) => {
         </CardContent>
 
         <CardContent className="cardPart">
-          <Link fontWeight="sm">path/path/path/path/path/path</Link>
+          <Link fontWeight="sm">{path}</Link>
         </CardContent>
 
         <Button
           variant="solid"
           color="danger"
           onClick={() => {
+            console.log("id", id);
             handleDelete(id);
           }}
         >

@@ -2,29 +2,39 @@ import React, { useState, useEffect } from "react";
 import ProjectItem from "./ProjectItem";
 import { v4 as uuidv4 } from "uuid";
 
+type Card = {
+  id: string;
+};
+
 const ProjectItems = () => {
-  const [cards, setCards] = useState<React.ReactElement[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
 
   const handleDelete = (cardToDelete: string) => {
-    console.log("cards: ", cards);
-    const newCards = cards.filter((card) => card.props.id !== cardToDelete);
-    console.log("newCards: ", newCards);
-    setCards(newCards);
+    const filteredCards = cards.filter((card) => card.id !== cardToDelete);
+    setCards(filteredCards);
   };
 
   useEffect(() => {
-    for (let i = 0; i < 5; i++) {
+    const newCards: Card[] = [];
+    for (let i = 0; i < 10; i++) {
       const id = uuidv4();
-      console.log("Created card with key: ", id);
-      cards.push(<ProjectItem id={id} key={id} handleDelete={handleDelete} />);
+      newCards.push({ id });
     }
+    setCards(newCards);
   }, []);
 
-  useEffect(() => {
-    console.log("cards: ", cards);
-  }, [cards]);
-
-  return <>{cards}</>;
+  return (
+    <>
+      {cards.map((card) => (
+        <ProjectItem
+          key={card.id}
+          id={card.id}
+          handleDelete={handleDelete}
+          path={"path/path/path/path"}
+        />
+      ))}
+    </>
+  );
 };
 
 export default ProjectItems;
