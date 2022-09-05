@@ -4,7 +4,12 @@ import { useColorScheme } from "@mui/joy/styles";
 import MenuButtons from "./MenuButtons";
 import "../scss/components/menu.scss";
 
-const Menu = () => {
+type MenuProps = {
+  setView: (view: string) => void;
+};
+
+const Menu = (props: MenuProps) => {
+  const { setView } = props;
   const [checked, setChecked] = useState(false);
   const { mode, setMode } = useColorScheme();
 
@@ -25,7 +30,7 @@ const Menu = () => {
           }}
         />
       </div>
-      <MenuButtons />
+      <MenuButtons setView={setView} />
     </div>
   );
 };

@@ -4,13 +4,16 @@ import "../scss/components/menuButton.scss";
 
 type MenuButtonProps = {
   text: string;
+  setView: (view: string) => void;
 };
 
 const MenuButton = (props: MenuButtonProps) => {
-  const { text } = props;
+  const { text, setView } = props;
   return (
     <div className="menuButton">
-      <Button color="primary">{text}</Button>
+      <Button color="primary" onClick={() => setView(text)}>
+        {text}
+      </Button>
     </div>
   );
 };
