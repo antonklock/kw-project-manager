@@ -5,6 +5,10 @@ import "../../scss/components/views/projectViews.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const ProjectsView = () => {
+  const handleAddProject = () => {
+    window.electronAPI.alertHelloWorld("1337!");
+  };
+
   return (
     <>
       <div className="topWrapper">
@@ -13,7 +17,11 @@ const ProjectsView = () => {
             Projects
           </Typography>
           <div>
-            <Button className="button" variant="outlined">
+            <Button
+              className="button"
+              variant="outlined"
+              onClick={handleAddProject}
+            >
               Add Project
             </Button>
             <Button className="button">New Project</Button>

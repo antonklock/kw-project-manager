@@ -11,6 +11,7 @@ import {
 import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import electron from "electron";
 
 type ChildProps = {
   handleDelete: (keyToDelete: string) => void;
@@ -21,6 +22,12 @@ type ChildProps = {
 const ProjectItem = (props: ChildProps) => {
   const { handleDelete, id, path } = props;
   const [checked, setChecked] = useState(false);
+
+  //"C:UsersAdminOneDriveDesktophello.txt"
+
+  const handlePathClicked = () => {
+    // electron.shell.showItemInFolder("C:/Users/Admin/OneDrive/Desktop/");
+  };
   return (
     <>
       <Card row variant="outlined" className="projectItem">
@@ -42,7 +49,9 @@ const ProjectItem = (props: ChildProps) => {
         </CardContent>
 
         <CardContent className="cardPart">
-          <Link fontWeight="sm">{path}</Link>
+          <Link fontWeight="sm" onClick={handlePathClicked}>
+            {path}
+          </Link>
         </CardContent>
 
         <Button

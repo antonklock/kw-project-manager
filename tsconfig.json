@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*"]
-    }
+    },
+    // "typeRoots": ["./node_modules/@types", "./typings", "./renderer.d.ts"]
   },
   "include": ["src/**/*"]
 }
