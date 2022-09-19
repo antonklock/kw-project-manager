@@ -1,12 +1,34 @@
-import React from "react";
 import { Button, TextField, Typography, Sheet } from "@mui/joy";
+import AddNewProject from "../AddNewProject";
 import ProjectItems from "../ProjectItems";
 import "../../scss/components/views/projectViews.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useState } from "react";
+import Popup from "reactjs-popup";
+import AddExistingProject from "../AddExistingProject";
+import React from "react";
+
+type Project = {
+  name: string;
+  client: string;
+  path: string;
+  starred: boolean;
+  id: string;
+};
 
 const ProjectsView = () => {
-  const handleAddProject = () => {
-    window.electronAPI.alertHelloWorld("1337!");
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [projectItems, setProjectItems] = useState<Project[]>([]);
+
+  const handleAddNewProject = (newProject: Project) => {
+    setProjectItems([...projectItems, newProject]);
+  };
+
+  const handleDeleteProject = (projectToDelete: string) => {
+    const filteredProjects = projectItems.filter(
+      (project) => project.id !== projectToDelete
+    );
+    setProjectItems(filteredProjects);
   };
 
   return (
@@ -17,14 +39,12 @@ const ProjectsView = () => {
             Projects
           </Typography>
           <div>
-            <Button
-              className="button"
-              variant="outlined"
-              onClick={handleAddProject}
-            >
-              Add Project
-            </Button>
-            <Button className="button">New Project</Button>
+            <AddExistingProject />
+            <AddNewProject
+              projectItems={projectItems}
+              setProjectItems={setProjectItems}
+              handleAddNewProject={handleAddNewProject}
+            />
           </div>
         </div>
         <div className="textField">
@@ -40,12 +60,17 @@ const ProjectsView = () => {
             <KeyboardArrowDownIcon /> Star
           </Button>
           <p>Name</p>
+          <p>Client</p>
           <p>Path</p>
           <p>Settings</p>
         </Sheet>
       </div>
       <div className="projectItems">
-        <ProjectItems />
+        <ProjectItems
+          projectItems={projectItems}
+          setProjectItems={setProjectItems}
+          handleDeleteProject={handleDeleteProject}
+        />
       </div>
     </>
   );

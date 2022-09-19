@@ -11,22 +11,25 @@ import {
 import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import electron from "electron";
 
-type ChildProps = {
-  handleDelete: (keyToDelete: string) => void;
+import { shell } from "electron";
+
+type ProjectItemProps = {
+  handleDeleteProject: (keyToDelete: string) => void;
   id: string;
   path: string;
+  name: string;
+  client: string;
+  starred: boolean;
 };
 
-const ProjectItem = (props: ChildProps) => {
-  const { handleDelete, id, path } = props;
-  const [checked, setChecked] = useState(false);
+const ProjectItem = (props: ProjectItemProps) => {
+  const { handleDeleteProject, id, path, starred, name, client } = props;
+  const [isStarred, setStarred] = useState(starred);
 
-  //"C:UsersAdminOneDriveDesktophello.txt"
-
-  const handlePathClicked = () => {
-    // electron.shell.showItemInFolder("C:/Users/Admin/OneDrive/Desktop/");
+  const handlePathClick = () => {
+    console.log("Path clicked");
+    // shell.openPath("/Users/antonklock/Desktop");
   };
   return (
     <>
@@ -35,21 +38,27 @@ const ProjectItem = (props: ChildProps) => {
           <IconButton
             aria-label="Star project"
             variant="plain"
-            onClick={() => setChecked(!checked)}
+            onClick={() => setStarred(!isStarred)}
           >
-            {checked ? <StarIcon /> : <StarBorderIcon />}
+            {isStarred ? <StarIcon /> : <StarBorderIcon />}
           </IconButton>
         </CardOverflow>
 
         <CardContent className="cardPart">
           <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
-            Project Name
+            {name}
           </Typography>
           <Typography level="body2"> {id} </Typography>
         </CardContent>
 
         <CardContent className="cardPart">
-          <Link fontWeight="sm" onClick={handlePathClicked}>
+          <Typography fontWeight="md" textColor="plainColor" mb={0.5}>
+            {client}
+          </Typography>
+        </CardContent>
+
+        <CardContent className="cardPart">
+          <Link fontWeight="sm" onClick={handlePathClick}>
             {path}
           </Link>
         </CardContent>
@@ -59,7 +68,7 @@ const ProjectItem = (props: ChildProps) => {
           color="danger"
           onClick={() => {
             console.log("id", id);
-            handleDelete(id);
+            handleDeleteProject(id);
           }}
         >
           Delete
