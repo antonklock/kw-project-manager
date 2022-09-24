@@ -3,33 +3,31 @@ import AddNewProject from "../AddNewProject";
 import ProjectItems from "../ProjectItems";
 import "../../scss/components/views/projectViews.scss";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useState } from "react";
-import Popup from "reactjs-popup";
+import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
-import React from "react";
-
-type Project = {
-  name: string;
-  client: string;
-  path: string;
-  starred: boolean;
-  id: string;
-};
+import { getProjects, deleteProject, addProject } from "../../data/projects";
+import { Project } from "../../types/appTypes";
 
 const ProjectsView = () => {
-  const [showPopUp, setShowPopUp] = useState(false);
   const [projectItems, setProjectItems] = useState<Project[]>([]);
 
   const handleAddNewProject = (newProject: Project) => {
-    setProjectItems([...projectItems, newProject]);
+    addProject(newProject);
+    const newProjectList = getProjects();
+    setProjectItems([...newProjectList]);
   };
 
   const handleDeleteProject = (projectToDelete: string) => {
-    const filteredProjects = projectItems.filter(
-      (project) => project.id !== projectToDelete
-    );
-    setProjectItems(filteredProjects);
+    deleteProject(projectToDelete);
+    const newProjectList = getProjects();
+    setProjectItems([...newProjectList]);
   };
+
+  //LOAD INITIAL PROJECTS
+  useEffect(() => {
+    const newProjectList = getProjects();
+    setProjectItems([...newProjectList]);
+  }, []);
 
   return (
     <>
@@ -68,7 +66,6 @@ const ProjectsView = () => {
       <div className="projectItems">
         <ProjectItems
           projectItems={projectItems}
-          setProjectItems={setProjectItems}
           handleDeleteProject={handleDeleteProject}
         />
       </div>

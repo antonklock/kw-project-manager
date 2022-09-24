@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, Button, TextField, Box, Checkbox } from "@mui/joy";
 import Popup from "reactjs-popup";
 import "../scss/components/addNewProject.scss";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import { ipcRenderer } from "electron";
 
 type Project = {
   name: string;
@@ -22,22 +22,19 @@ type ProjectItemsProps = {
 const AddNewProject = (props: ProjectItemsProps) => {
   const { projectItems, setProjectItems, handleAddNewProject } = props;
   const [open, setOpen] = useState(false);
+  const [path, setPath] = useState("");
+  const [starred, setStarred] = useState(false);
   const closeModal = () => setOpen(false);
 
   let name = "";
   let client = "";
-  let path = "";
-  let starred = false;
+  // let path = "";
+  // let starred = false;
 
-  // const handleAddProject = (
-  //   name: string,
-  //   client: string,
-  //   path: string,
-  //   starred: boolean,
-  //   id: string
-  // ) => {
-  //   setProjectItems([...projectItems, { name, client, path, starred, id }]);
-  // };
+  const handleSetPath = () => {
+    window.electronAPI.pickLocation().then((result) => setPath(result));
+  };
+
   return (
     <>
       <Button
@@ -66,41 +63,40 @@ const AddNewProject = (props: ProjectItemsProps) => {
           ></TextField>
           <div style={{ display: "flex" }}>
             <TextField
+              value={path}
               placeholder={"Location"}
               onChange={(e) => {
-                path = e.target.value;
+                setPath(e.target.value);
               }}
             />
-            <Button>...</Button>
+            <Button onClick={handleSetPath}>...</Button>
           </div>
           <Box>
             <Checkbox
               label="Starred"
               checked={starred}
               onChange={() => {
-                starred = !starred;
+                setStarred(!starred);
               }}
             />
           </Box>
           <Button
             onClick={() => {
-              const newProject = {
-                name,
-                client,
-                path,
-                starred,
+              handleAddNewProject({
+                name: name,
+                client: client,
+                path: path,
+                starred: starred,
                 id: uuidv4(),
-              };
-              handleAddNewProject(newProject);
+              });
               closeModal();
             }}
           >
-            Add
+            Create
           </Button>
         </Card>
       </Popup>
     </>
   );
 };
-
 export default AddNewProject;

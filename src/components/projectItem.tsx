@@ -12,8 +12,6 @@ import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
-import { shell } from "electron";
-
 type ProjectItemProps = {
   handleDeleteProject: (keyToDelete: string) => void;
   id: string;
@@ -29,7 +27,6 @@ const ProjectItem = (props: ProjectItemProps) => {
 
   const handlePathClick = () => {
     console.log("Path clicked");
-    // shell.openPath("/Users/antonklock/Desktop");
   };
   return (
     <>
@@ -67,7 +64,6 @@ const ProjectItem = (props: ProjectItemProps) => {
           variant="solid"
           color="danger"
           onClick={() => {
-            console.log("id", id);
             handleDeleteProject(id);
           }}
         >

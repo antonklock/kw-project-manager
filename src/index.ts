@@ -41,6 +41,11 @@ app.on('ready', () => {
   createWindow();
 });
 
+ipcMain.handle('pickLocation', async () => {
+  const path = dialog.showOpenDialogSync({ properties: ['openDirectory'] }) || 'No file selected';
+  return path;
+});
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -66,5 +71,10 @@ const handleAlertHelloWorld = (event: Electron.IpcMainEvent, args: string | numb
   const mainWindow = BrowserWindow.fromWebContents(webContents);
   // alert(`Hello World! args: ${args} id: ${mainWindow.id}`);
   // console.log(`Hello World! args: ${args} id: ${mainWindow.id}`)
-  console.log(dialog.showOpenDialogSync({ properties: ['openFile', 'openDirectory', 'multiSelections'] }) || 'No file selected');
+  const path = dialog.showOpenDialogSync({ properties: ['openFile', 'openDirectory', 'multiSelections'] }) || 'No file selected';
+  return path;
+}
+
+const handlePickLocation = () => {
+  return dialog.showOpenDialogSync({ properties: ['openDirectory'] }) || 'No file selected';
 }
