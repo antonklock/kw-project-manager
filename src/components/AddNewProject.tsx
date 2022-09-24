@@ -20,16 +20,13 @@ type ProjectItemsProps = {
 };
 
 const AddNewProject = (props: ProjectItemsProps) => {
-  const { projectItems, setProjectItems, handleAddNewProject } = props;
+  const { handleAddNewProject } = props;
   const [open, setOpen] = useState(false);
   const [path, setPath] = useState("");
+  const [name, setName] = useState("");
+  const [client, setClient] = useState("");
   const [starred, setStarred] = useState(false);
   const closeModal = () => setOpen(false);
-
-  let name = "";
-  let client = "";
-  // let path = "";
-  // let starred = false;
 
   const handleSetPath = () => {
     window.electronAPI.pickLocation().then((result) => setPath(result));
@@ -52,13 +49,13 @@ const AddNewProject = (props: ProjectItemsProps) => {
           <TextField
             placeholder={"Project Name"}
             onChange={(e) => {
-              name = e.target.value;
+              setName(e.target.value);
             }}
           ></TextField>
           <TextField
             placeholder={"Client"}
             onChange={(e) => {
-              client = e.target.value;
+              setClient(e.target.value);
             }}
           ></TextField>
           <div style={{ display: "flex" }}>
