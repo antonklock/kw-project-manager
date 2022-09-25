@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";
-import { Project } from "../../types/appTypes";
+import { Project } from "../../types";
 
 const ProjectsView = () => {
   const [projectItems, setProjectItems] = useState<Project[]>([]);

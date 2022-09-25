@@ -3,7 +3,6 @@ import { Card, Button, TextField, Box, Checkbox } from "@mui/joy";
 import Popup from "reactjs-popup";
 import "../scss/components/addNewProject.scss";
 import { v4 as uuidv4 } from "uuid";
-import { ipcRenderer } from "electron";
 
 type Project = {
   name: string;
