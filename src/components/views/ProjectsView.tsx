@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";
 import { Project } from "../../types";
+import DropDown from "../DropDown";
 
 const ProjectsView = () => {
   const [projectItems, setProjectItems] = useState<Project[]>([]);
@@ -36,6 +37,7 @@ const ProjectsView = () => {
           <Typography level="h4" fontWeight="400">
             Projects
           </Typography>
+          <DropDown />
           <div>
             <AddExistingProject />
             <AddNewProject
