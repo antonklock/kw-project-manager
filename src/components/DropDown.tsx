@@ -5,22 +5,28 @@ const DropDown = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const dropDownButtonRef = useRef<HTMLButtonElement>(null);
+  const dropDownMenuRef = useRef<HTMLDivElement>(null);
 
   const [currentProjectGroup, setCurrentProjectGroup] = useState(null);
 
   const handleClick = () => {
-    if (menuOpen) {
-      setAnchorEl(null);
-      setMenuOpen(false);
-      console.log("close! " + menuOpen);
-    } else {
-      setAnchorEl(dropDownButtonRef.current);
+    if (!menuOpen) {
+      document.addEventListener("mouseup", handleClose);
       setMenuOpen(true);
-      console.log("open! " + menuOpen);
+    } else {
+      document.removeEventListener("mouseup", handleClose);
+      setMenuOpen(false);
     }
   };
-  const handleClose = () => {
-    setMenuOpen(false);
+
+  const handleClose = (e: MouseEvent) => {
+    if (
+      e.target !== dropDownButtonRef.current &&
+      (e.target as HTMLDivElement).parentNode !== dropDownMenuRef.current
+    ) {
+      setMenuOpen(false);
+      document.removeEventListener("mouseup", handleClose);
+    }
   };
 
   const handleSetCurrentProjectGroup = (projectGroup: string) => {
@@ -30,6 +36,8 @@ const DropDown = () => {
 
   useEffect(() => {
     setCurrentProjectGroup("Home Computer");
+    setAnchorEl(dropDownButtonRef.current);
+    return setMenuOpen(false);
   }, []);
 
   return (
@@ -44,7 +52,12 @@ const DropDown = () => {
         {currentProjectGroup}
       </Button>
       {menuOpen && (
-        <Menu id="dropDownMenu" anchorEl={anchorEl} open={true}>
+        <Menu
+          id="dropDownMenu"
+          anchorEl={anchorEl}
+          open={true}
+          ref={dropDownMenuRef}
+        >
           <MenuItem
             onClick={() => handleSetCurrentProjectGroup("Home Computer")}
           >
@@ -59,9 +72,7 @@ const DropDown = () => {
             Laptop
           </MenuItem>
           <ListDivider />
-          <MenuItem onClick={handleClose} variant="soft">
-            + Add New
-          </MenuItem>
+          <MenuItem variant="soft">+ Add New</MenuItem>
         </Menu>
       )}
     </>

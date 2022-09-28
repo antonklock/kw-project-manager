@@ -11,6 +11,7 @@ import {
 import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import DropDown from "./DropDown";
 
 type ProjectItemProps = {
   handleDeleteProject: (keyToDelete: string) => void;
@@ -60,7 +61,8 @@ const ProjectItem = (props: ProjectItemProps) => {
           </Link>
         </CardContent>
 
-        <Button
+        <DropDown />
+        {/* <Button
           variant="solid"
           color="danger"
           onClick={() => {
@@ -68,7 +70,7 @@ const ProjectItem = (props: ProjectItemProps) => {
           }}
         >
           Delete
-        </Button>
+        </Button> */}
       </Card>
     </>
   );
