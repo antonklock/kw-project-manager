@@ -43,6 +43,7 @@ const ProjectsView = () => {
         </MenuItem>
       ),
       onClick: () => handleMenuItemClick("+Add New"),
+      closeOnClick: false,
     },
   ]);
 
@@ -76,7 +77,7 @@ const ProjectsView = () => {
             Projects
           </Typography>
           <DropDown
-            buttonElement={dropDownButtonText}
+            buttonElement={<Typography>{dropDownButtonText}</Typography>}
             menuItems={dropDownMenuItems}
           />
           <div>
