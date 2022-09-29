@@ -1,4 +1,11 @@
-import { Button, TextField, Typography, Sheet } from "@mui/joy";
+import {
+  Button,
+  TextField,
+  Typography,
+  Sheet,
+  MenuItem,
+  ListDivider,
+} from "@mui/joy";
 import AddNewProject from "../AddNewProject";
 import ProjectItems from "../ProjectItems";
 import "../../scss/components/views/projectViews.scss";
@@ -8,9 +15,40 @@ import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";
 import { Project } from "../../types";
 import DropDown from "../DropDown";
+import { v4 as uuidv4 } from "uuid";
 
 const ProjectsView = () => {
   const [projectItems, setProjectItems] = useState<Project[]>([]);
+  const [dropDownButtonText, setDropDownButtonText] = useState("Home Computer");
+  const [dropDownMenuItems, setDropDownMenuItems] = useState([
+    {
+      reactElement: <MenuItem key={uuidv4()}>Home Computer</MenuItem>,
+      onClick: () => handleMenuItemClick("Home Computer"),
+    },
+    {
+      reactElement: <MenuItem key={uuidv4()}>Work Computer</MenuItem>,
+      onClick: () => handleMenuItemClick("Work Computer"),
+    },
+    {
+      reactElement: <MenuItem key={uuidv4()}>Laptop</MenuItem>,
+      onClick: () => handleMenuItemClick("Laptop"),
+    },
+    {
+      reactElement: <ListDivider key={uuidv4()} />,
+    },
+    {
+      reactElement: (
+        <MenuItem key={uuidv4()} variant="soft">
+          + Add New
+        </MenuItem>
+      ),
+      onClick: () => handleMenuItemClick("+Add New"),
+    },
+  ]);
+
+  const handleMenuItemClick = (item: string) => {
+    setDropDownButtonText(item);
+  };
 
   const handleAddNewProject = (newProject: Project) => {
     addProject(newProject);
@@ -37,7 +75,10 @@ const ProjectsView = () => {
           <Typography level="h4" fontWeight="400">
             Projects
           </Typography>
-          <DropDown />
+          <DropDown
+            buttonElement={dropDownButtonText}
+            menuItems={dropDownMenuItems}
+          />
           <div>
             <AddExistingProject />
             <AddNewProject

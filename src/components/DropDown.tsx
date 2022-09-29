@@ -1,15 +1,22 @@
-import { Button, ListDivider, Menu, MenuItem } from "@mui/joy";
+import { Button, Menu } from "@mui/joy";
 import React, { useState, useRef, useEffect } from "react";
 
-const DropDown = () => {
+type MenuItem = { reactElement: React.ReactElement; onClick?: () => void };
+
+type DropDownProps = {
+  menuItems: MenuItem[];
+  buttonElement: React.ReactNode;
+};
+
+const DropDown = (props: DropDownProps) => {
+  const { menuItems, buttonElement } = props;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const dropDownButtonRef = useRef<HTMLButtonElement>(null);
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
 
-  const [currentProjectGroup, setCurrentProjectGroup] = useState(null);
-
-  const handleClick = () => {
+  const handleOpenMenu = () => {
     if (!menuOpen) {
       document.addEventListener("mouseup", handleClose);
       setMenuOpen(true);
@@ -22,20 +29,20 @@ const DropDown = () => {
   const handleClose = (e: MouseEvent) => {
     if (
       e.target !== dropDownButtonRef.current &&
-      (e.target as HTMLDivElement).parentNode !== dropDownMenuRef.current
+      (e.target as HTMLElement).parentNode !== dropDownMenuRef.current
     ) {
       setMenuOpen(false);
       document.removeEventListener("mouseup", handleClose);
     }
   };
 
-  const handleSetCurrentProjectGroup = (projectGroup: string) => {
-    setCurrentProjectGroup(projectGroup);
+  const handleMenuClick = (callBack: () => void) => {
+    callBack();
     setMenuOpen(false);
+    document.removeEventListener("mouseup", handleClose);
   };
 
   useEffect(() => {
-    setCurrentProjectGroup("Home Computer");
     setAnchorEl(dropDownButtonRef.current);
     return setMenuOpen(false);
   }, []);
@@ -46,10 +53,10 @@ const DropDown = () => {
         id="dropDownButton"
         variant="outlined"
         color="neutral"
-        onClick={handleClick}
+        onClick={handleOpenMenu}
         ref={dropDownButtonRef}
       >
-        {currentProjectGroup}
+        {buttonElement}
       </Button>
       {menuOpen && (
         <Menu
@@ -58,21 +65,11 @@ const DropDown = () => {
           open={true}
           ref={dropDownMenuRef}
         >
-          <MenuItem
-            onClick={() => handleSetCurrentProjectGroup("Home Computer")}
-          >
-            Home Computer
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleSetCurrentProjectGroup("Work Computer")}
-          >
-            Work Computer
-          </MenuItem>
-          <MenuItem onClick={() => handleSetCurrentProjectGroup("Laptop")}>
-            Laptop
-          </MenuItem>
-          <ListDivider />
-          <MenuItem variant="soft">+ Add New</MenuItem>
+          {menuItems.map((menuItem) =>
+            React.cloneElement(menuItem.reactElement, {
+              onClick: () => handleMenuClick(menuItem.onClick),
+            })
+          )}
         </Menu>
       )}
     </>

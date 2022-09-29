@@ -6,12 +6,14 @@ import {
   CardContent,
   Typography,
   IconButton,
-  Button,
+  MenuItem,
 } from "@mui/joy";
 import Link from "@mui/joy/Link";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DropDown from "./DropDown";
+import { v4 as uuidv4 } from "uuid";
+import MoreVert from "@mui/icons-material/MoreVert";
 
 type ProjectItemProps = {
   handleDeleteProject: (keyToDelete: string) => void;
@@ -61,16 +63,23 @@ const ProjectItem = (props: ProjectItemProps) => {
           </Link>
         </CardContent>
 
-        <DropDown />
-        {/* <Button
-          variant="solid"
-          color="danger"
-          onClick={() => {
-            handleDeleteProject(id);
-          }}
-        >
-          Delete
-        </Button> */}
+        <DropDown
+          buttonElement={<MoreVert fontSize="small" />}
+          menuItems={[
+            {
+              reactElement: <MenuItem key={uuidv4()}> Edit </MenuItem>,
+              onClick: () => console.log("Edit"),
+            },
+            {
+              reactElement: (
+                <MenuItem key={uuidv4()} color="danger">
+                  Delete
+                </MenuItem>
+              ),
+              onClick: () => handleDeleteProject(id),
+            },
+          ]}
+        />
       </Card>
     </>
   );
