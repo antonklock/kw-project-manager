@@ -10,10 +10,9 @@ const Menu = (props: MenuProps) => {
 
   return (
     <div className="menu">
-      <div className="menuTop">
-        <p>Avatar</p>
-        <p>Darkmode Switch</p>
-      </div>
+      <div className="bg-black rounded-full w-10 h-10"></div>
+      <p>Switch</p>
+      <div className="border"></div>
       <MenuButtons setView={setView} />
     </div>
   );

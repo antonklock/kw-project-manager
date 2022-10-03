@@ -8,7 +8,7 @@ type MenuButtonsProps = {
 const MenuButtons = (props: MenuButtonsProps) => {
   const { setView } = props;
   return (
-    <div className="menuButtons">
+    <div className="flex flex-col items-center">
       <MenuButton text={"Projects"} setView={setView} />
       <MenuButton text={"Settings"} setView={setView} />
       <MenuButton text={"Third view"} setView={setView} />

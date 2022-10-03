@@ -1,10 +1,10 @@
 import AddNewProject from "../AddNewProject";
-import ProjectItems from "../ProjectItems";
 import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";
 import { Project } from "../../types";
 import DropDown from "../DropDown";
+import ProjectItems from "../ProjectItems";
 
 const ProjectsView = () => {
   const [projectItems, setProjectItems] = useState<Project[]>([]);
@@ -47,28 +47,28 @@ const ProjectsView = () => {
 
   return (
     <>
-      <div className="topWrapper">
-        <div className="topRow">
-          <h1>Projects</h1>
+      <div className="">
+        <div className="flex flex-row justify-between">
+          <h1 className="text-xl">Projects</h1>
           <DropDown menuItems={dropDownMenuItems} />
-          <div>
+          <div className="">
             <AddExistingProject />
             <AddNewProject
               projectItems={projectItems}
               setProjectItems={setProjectItems}
               handleAddNewProject={handleAddNewProject}
             />
+            <div className="">
+              <input placeholder="Search" />
+            </div>
           </div>
         </div>
-        <div className="textField">
-          <input placeholder="Search" />
-        </div>
-        <div className="filterBar">
-          <button>Star</button>
-          <button>Name</button>
-          <button>Client</button>
-          <button>Path</button>
-          <button>Settings</button>
+        <div className="flex flex-row justify-around">
+          <button className="btn grow">Star</button>
+          <button className="btn grow">Name</button>
+          <button className="btn grow">Client</button>
+          <button className="btn grow">Path</button>
+          <button className="btn grow">Settings</button>
         </div>
       </div>
       <div className="projectItems">

@@ -32,6 +32,7 @@ const AddNewProject = (props: ProjectItemsProps) => {
   return (
     <>
       <button
+        className="btn btn-primary"
         onClick={() => {
           setOpen((o) => !o);
         }}
