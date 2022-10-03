@@ -1,78 +1,69 @@
-import { Button, Menu } from "@mui/joy";
-import { MenuItem } from "@mui/material";
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type MenuItem = {
-  reactElement: React.ReactElement;
+  name: string;
   onClick?: () => void;
-  closeOnClick?: boolean;
 };
 
 type DropDownProps = {
   menuItems: MenuItem[];
-  buttonElement: React.ReactElement;
+  buttonText?: string;
 };
 
 const DropDown = (props: DropDownProps) => {
-  const { menuItems, buttonElement } = props;
+  const { menuItems, buttonText } = props;
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const dropDownButtonRef = useRef<HTMLButtonElement>(null);
-  const dropDownMenuRef = useRef<HTMLDivElement>(null);
-
-  const handleClickMenuButton = () => {
-    console.log("Menu button clicked");
-    if (!menuOpen) {
-      document.addEventListener("mouseup", handleClose);
-      setMenuOpen(true);
-    } else {
-      document.removeEventListener("mouseup", handleClose);
-      setMenuOpen(false);
+  const handleClick = (option: string) => {
+    const item = menuItems.find((item) => item.name === option);
+    if (item && item.onClick) {
+      item.onClick();
     }
   };
-
-  const handleClose = (e: MouseEvent) => {
-    console.log(
-      (e.target as HTMLElement).contains(dropDownButtonRef.current) ||
-        (e.target as HTMLElement).contains(dropDownMenuRef.current)
-    );
-    document.removeEventListener("mouseup", handleClose);
-    if (
-      (e.target as HTMLElement).contains(dropDownButtonRef.current) ||
-      (e.target as HTMLElement).contains(dropDownMenuRef.current)
-    ) {
-      if (e.target != dropDownButtonRef.current) {
-        setMenuOpen(false);
-      }
-    }
-  };
-
-  const handleMenuClick = (callBack: () => void, closeOnClick = true) => {
-    callBack();
-    if (closeOnClick) {
-      setMenuOpen(false);
-      document.removeEventListener("mouseup", handleClose);
-    }
-  };
-
-  useEffect(() => {
-    setAnchorEl(dropDownButtonRef.current);
-    return setMenuOpen(false);
-  }, []);
 
   return (
     <>
-      <Button
+      <label htmlFor="dropdown">
+        <select
+          name="select1"
+          id="dropdown"
+          value={buttonText}
+          onChange={(e) => {
+            handleClick(e.target.value);
+            return buttonText;
+          }}
+        >
+          {buttonText ? (
+            <option disabled hidden value={buttonText}>
+              {buttonText}
+            </option>
+          ) : (
+            false
+          )}
+
+          {menuItems.map((item) => (
+            <option key={uuidv4()} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </label>
+    </>
+  );
+};
+
+export default DropDown;
+
+{
+  /* <>
+      <button
         id="dropDownButton"
-        variant="outlined"
         color="neutral"
         onClick={handleClickMenuButton}
         ref={dropDownButtonRef}
       >
         {buttonElement}
-      </Button>
+      </button>
       {menuOpen && (
         <Menu
           id="dropDownMenu"
@@ -89,8 +80,5 @@ const DropDown = (props: DropDownProps) => {
           )}
         </Menu>
       )}
-    </>
-  );
-};
-
-export default DropDown;
+    </> */
+}

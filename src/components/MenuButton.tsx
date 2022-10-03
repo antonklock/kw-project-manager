@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@mui/joy";
 import "../scss/components/menuButton.scss";
 
 type MenuButtonProps = {
@@ -11,9 +10,7 @@ const MenuButton = (props: MenuButtonProps) => {
   const { text, setView } = props;
   return (
     <div className="menuButton">
-      <Button color="primary" onClick={() => setView(text)}>
-        {text}
-      </Button>
+      <button onClick={() => setView(text)}>{text}</button>
     </div>
   );
 };

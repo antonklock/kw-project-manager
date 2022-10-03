@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Card, Button, TextField, Box, Checkbox } from "@mui/joy";
 import Popup from "reactjs-popup";
 import "../scss/components/addNewProject.scss";
 import { v4 as uuidv4 } from "uuid";
@@ -33,50 +32,49 @@ const AddNewProject = (props: ProjectItemsProps) => {
 
   return (
     <>
-      <Button
-        className="button"
+      <button
         onClick={() => {
           setOpen((o) => !o);
         }}
       >
         New Project
-      </Button>
+      </button>
 
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-        <Card className={"popUp"}>
+        <div className={"popUp"}>
           <h1>New Project</h1>
-          <TextField
+          <input
             placeholder={"Project Name"}
             onChange={(e) => {
               setName(e.target.value);
             }}
-          ></TextField>
-          <TextField
+          ></input>
+          <input
             placeholder={"Client"}
             onChange={(e) => {
               setClient(e.target.value);
             }}
-          ></TextField>
+          ></input>
           <div style={{ display: "flex" }}>
-            <TextField
+            <input
               value={path}
               placeholder={"Location"}
               onChange={(e) => {
                 setPath(e.target.value);
               }}
             />
-            <Button onClick={handleSetPath}>...</Button>
+            <button onClick={handleSetPath}>...</button>
           </div>
-          <Box>
-            <Checkbox
-              label="Starred"
+          <div>
+            <input
+              type="checkbox"
               checked={starred}
               onChange={() => {
                 setStarred(!starred);
               }}
             />
-          </Box>
-          <Button
+          </div>
+          <button
             onClick={() => {
               handleAddNewProject({
                 name: name,
@@ -89,8 +87,8 @@ const AddNewProject = (props: ProjectItemsProps) => {
             }}
           >
             Create
-          </Button>
-        </Card>
+          </button>
+        </div>
       </Popup>
     </>
   );

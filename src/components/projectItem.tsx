@@ -1,20 +1,6 @@
 import React, { useState } from "react";
 import "../scss/components/projectItem.scss";
-import {
-  Card,
-  CardOverflow,
-  CardContent,
-  Typography,
-  IconButton,
-  MenuItem,
-  Checkbox,
-} from "@mui/joy";
-import Link from "@mui/joy/Link";
-import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DropDown from "./DropDown";
-import { v4 as uuidv4 } from "uuid";
-import MoreVert from "@mui/icons-material/MoreVert";
 
 type ProjectItemProps = {
   handleDeleteProject: (keyToDelete: string) => void;
@@ -34,54 +20,32 @@ const ProjectItem = (props: ProjectItemProps) => {
   };
   return (
     <>
-      <Card row variant="outlined" className="projectItem">
-        <CardOverflow className="cardPart">
-          <IconButton
-            aria-label="Star project"
-            variant="plain"
-            onClick={() => setStarred(!isStarred)}
-          >
-            {isStarred ? <StarIcon /> : <StarBorderIcon />}
-          </IconButton>
-        </CardOverflow>
+      <div className="projectItem">
+        <button onClick={() => setStarred(!isStarred)}>
+          {isStarred ? <p>Starred</p> : <p>Not starred</p>}
+        </button>
 
-        <CardContent className="cardPart">
-          <Typography fontWeight="md" textColor="success.plainColor" mb={0.5}>
-            {name}
-          </Typography>
-          <Typography level="body2"> {id} </Typography>
-        </CardContent>
+        <div className="cardPart">
+          <h3>{name}</h3>
+          <h4> {id} </h4>
+        </div>
 
-        <CardContent className="cardPart">
-          <Typography fontWeight="md" textColor="plainColor" mb={0.5}>
-            {client}
-          </Typography>
-        </CardContent>
+        <div className="cardPart">
+          <h3>{client}</h3>
+        </div>
 
-        <CardContent className="cardPart">
-          <Link fontWeight="sm" onClick={handlePathClick}>
-            {path}
-          </Link>
-        </CardContent>
+        <div className="cardPart">
+          <p onClick={handlePathClick}>{path}</p>
+        </div>
 
         <DropDown
-          buttonElement={<MoreVert fontSize="small" />}
+          buttonText="..."
           menuItems={[
-            {
-              reactElement: <MenuItem key={uuidv4()}> Edit </MenuItem>,
-              onClick: () => console.log("Edit"),
-            },
-            {
-              reactElement: (
-                <MenuItem key={uuidv4()} color="danger">
-                  Delete
-                </MenuItem>
-              ),
-              onClick: () => handleDeleteProject(id),
-            },
+            { name: "Edit", onClick: () => console.log("Edit") },
+            { name: "Delete", onClick: () => handleDeleteProject(id) },
           ]}
         />
-      </Card>
+      </div>
     </>
   );
 };

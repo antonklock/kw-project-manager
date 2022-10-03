@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@mui/joy";
 
 const AddExistingProject = () => {
   const handleAddExistingProject = () => {
@@ -9,13 +8,7 @@ const AddExistingProject = () => {
   };
   return (
     <>
-      <Button
-        className="button"
-        variant="outlined"
-        onClick={handleAddExistingProject}
-      >
-        Add Project
-      </Button>
+      <button onClick={handleAddExistingProject}>Add Project</button>
     </>
   );
 };
