@@ -1,7 +1,5 @@
 import React from "react";
-
 import MenuButtons from "./MenuButtons";
-import "../scss/components/menu.scss";
 
 type MenuProps = {
   setView: (view: string) => void;

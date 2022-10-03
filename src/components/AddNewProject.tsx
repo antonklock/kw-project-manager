@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
-import "../scss/components/addNewProject.scss";
 import { v4 as uuidv4 } from "uuid";
 
 type Project = {

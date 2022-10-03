@@ -1,6 +1,5 @@
 import AddNewProject from "../AddNewProject";
 import ProjectItems from "../ProjectItems";
-import "../../scss/components/views/projectViews.scss";
 import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";

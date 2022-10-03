@@ -1,5 +1,4 @@
 import React from "react";
-import "../scss/components/menuButton.scss";
 
 type MenuButtonProps = {
   text: string;

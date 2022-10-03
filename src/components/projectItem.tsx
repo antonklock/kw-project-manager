@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../scss/components/projectItem.scss";
 import DropDown from "./DropDown";
 
 type ProjectItemProps = {

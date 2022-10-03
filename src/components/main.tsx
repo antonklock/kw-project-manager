@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../scss/components/main.scss";
+import "../css/main.css";
 import ProjectsView from "./views/ProjectsView";
 import SettingsView from "./views/SettingsView";
 import Menu from "./Menu";

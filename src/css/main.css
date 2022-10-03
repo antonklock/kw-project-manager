@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    flex-grow: 1;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    max-width: 180px;
+    border-right: 1px solid rgb(50, 50, 50);
+    padding: 25px;
+}
+
+.views {
+    width: 100vw;
+    min-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
