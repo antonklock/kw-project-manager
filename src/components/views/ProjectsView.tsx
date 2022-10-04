@@ -2,7 +2,7 @@ import AddNewProject from "../AddNewProject";
 import React, { useEffect, useState } from "react";
 import AddExistingProject from "../AddExistingProject";
 import { getProjects, deleteProject, addProject } from "../../data/projects";
-import { Project } from "../../types";
+import { Project } from "../../../types/types";
 import DropDown from "../DropDown";
 import ProjectItems from "../ProjectItems";
 
@@ -47,29 +47,36 @@ const ProjectsView = () => {
 
   return (
     <>
-      <div className="">
-        <div className="flex flex-row justify-between">
-          <h1 className="text-xl">Projects</h1>
+      <div className="flex flex-row justify-between p-5">
+        <div className="prose">
+          <h1>Projects</h1>
           <DropDown menuItems={dropDownMenuItems} />
-          <div className="">
+        </div>
+        <div>
+          <div className="mb-4">
             <AddExistingProject />
             <AddNewProject
               projectItems={projectItems}
               setProjectItems={setProjectItems}
               handleAddNewProject={handleAddNewProject}
             />
-            <div className="">
-              <input placeholder="Search" />
-            </div>
+          </div>
+
+          <div className="">
+            <input
+              type="text"
+              placeholder="Search"
+              className="input input-bordered w-full max-w-xs"
+            />
           </div>
         </div>
-        <div className="flex flex-row justify-around">
-          <button className="btn grow">Star</button>
-          <button className="btn grow">Name</button>
-          <button className="btn grow">Client</button>
-          <button className="btn grow">Path</button>
-          <button className="btn grow">Settings</button>
-        </div>
+      </div>
+      <div className="flex flex-row justify-around bg-base-300 rounded-md mx-5">
+        <button className="btn btn-ghost rounded-none">Star</button>
+        <button className="btn btn-ghost rounded-none">Name</button>
+        <button className="btn btn-ghost rounded-none">Client</button>
+        <button className="btn btn-ghost rounded-none">Path</button>
+        <button className="btn btn-ghost rounded-none">Settings</button>
       </div>
       <div className="projectItems">
         <ProjectItems

@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectItem from "./ProjectItem";
-import { Project } from "../types";
+import { Project } from "../../types/types";
 
 type ProjectItemsProps = {
   projectItems: Project[];

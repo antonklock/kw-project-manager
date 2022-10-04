@@ -8,7 +8,10 @@ const AddExistingProject = () => {
   };
   return (
     <>
-      <button className="btn btn-outline" onClick={handleAddExistingProject}>
+      <button
+        className="btn btn-outline mr-2"
+        onClick={handleAddExistingProject}
+      >
         Add Project
       </button>
     </>

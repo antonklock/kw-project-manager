@@ -1,10 +1,10 @@
-import { Project } from "../types";
+import { Project } from "../../types/types";
 
 const projects: Project[] = [
     {
         name: "Test Project 1",
         client: "Test Client 1",
-        path: "/PATH/TO/PROJECT-1",
+        path: "/Users/antonklock/Desktop",
         starred: false,
         id: "testid1",
     },

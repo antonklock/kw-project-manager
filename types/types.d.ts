@@ -1,4 +1,5 @@
 export interface IElectronAPI {
+  openLocation(path: string): Promise<void>;
   alertHelloWorld(message: string): unknown;
   loadPreferences: () => Promise<void>,
   pickLocation: () => Promise<string>;
@@ -6,8 +7,10 @@ export interface IElectronAPI {
 
 declare global {
   interface Window {
-    electronAPI: IElectronAPI
+    electronAPI: IElectronAPI  
   }
+  declare module "@iconscout/react-unicons";
+  // declare module "*";
 }
 
 export type Project = {

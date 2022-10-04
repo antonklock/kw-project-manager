@@ -9,9 +9,10 @@ const Main = () => {
   const [view, setView] = useState("Projects");
   return (
     <>
-      <div className="flex">
+      <div className="flex p-5">
         <Menu setView={setView} />
-        <div className="w-screen">
+        <div className="divider divider-horizontal" />
+        <div className="grow">
           {view === "Projects" && <ProjectsView />}
           {view === "Settings" && <SettingsView />}
           {view === "Third view" && <ThirdView />}

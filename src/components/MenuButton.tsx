@@ -8,7 +8,10 @@ type MenuButtonProps = {
 const MenuButton = (props: MenuButtonProps) => {
   const { text, setView } = props;
   return (
-    <button className="btn btn-primary" onClick={() => setView(text)}>
+    <button
+      className="btn btn-primary w-3/4 my-1"
+      onClick={() => setView(text)}
+    >
       {text}
     </button>
   );

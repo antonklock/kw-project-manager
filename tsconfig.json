@@ -12,9 +12,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-      "*": ["node_modules/*"]
+      "*": ["types/*"]
     },
     // "typeRoots": ["./node_modules/@types", "./typings", "./renderer.d.ts"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "types/types.d.ts"],
 }

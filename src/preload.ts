@@ -6,4 +6,5 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("electronAPI", {
     alertHelloWorld: (message: string) => ipcRenderer.send("alertHelloWorld", message),
     pickLocation: () => ipcRenderer.invoke("pickLocation"),
+    openLocation: (path: string) => ipcRenderer.send("openLocation", path),
 });
