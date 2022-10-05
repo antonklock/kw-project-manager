@@ -29,7 +29,7 @@ const AddNewProject = (props: ProjectItemsProps) => {
 
   return (
     <>
-      <label htmlFor="my-modal" className="btn btn-primary modal-button">
+      <label htmlFor="my-modal" className="btn btn-info modal-button">
         New project
       </label>
 

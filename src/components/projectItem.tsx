@@ -42,7 +42,7 @@ const ProjectItem = (props: ProjectItemProps) => {
             <h4 className="text-gray-600"> {client} </h4>
           </div>
 
-          <div className="basis-1/3 text-blue-500 cursor-pointer">
+          <div className="basis-1/3 text-info cursor-pointer">
             <p onClick={handlePathClick}>{path}</p>
           </div>
 
