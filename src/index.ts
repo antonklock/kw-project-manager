@@ -6,6 +6,8 @@ import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
+const windowMinSize = {x: 1100, y: 600};
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   // eslint-disable-line global-require
@@ -15,8 +17,8 @@ if (require('electron-squirrel-startup')) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
+    height: windowMinSize.y,
+    width: windowMinSize.x,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       // preload: './preload.ts',
@@ -30,7 +32,9 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  mainWindow.setMinimumSize(windowMinSize.x, windowMinSize.y);
 };
 
 // This method will be called when Electron has finished
