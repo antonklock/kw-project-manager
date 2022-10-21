@@ -10,7 +10,6 @@ declare global {
     electronAPI: IElectronAPI  
   }
   declare module "@iconscout/react-unicons";
-  // declare module "*";
 }
 
 export type Project = {
