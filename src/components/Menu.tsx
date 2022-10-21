@@ -1,5 +1,5 @@
 import React from "react";
-import MenuButtons from "./MenuButtons";
+// import MenuButtons from "./MenuButtons";
 import { UilSetting } from "@iconscout/react-unicons";
 
 type MenuProps = {
@@ -18,6 +18,16 @@ const Menu = (props: MenuProps) => {
     console.log("Login");
     console.log("Email: " + email);
     console.log("Password: " + password);
+  };
+
+  const signUp = async (email: string, password: string) => {
+    console.log("Sign Up");
+    console.log("Email: " + email);
+    console.log("Password: " + password);
+    window.electronAPI
+      .handleSignUp(email, password)
+      .then((result: string) => console.log(result))
+      .catch((error: string) => console.log(error));
   };
 
   return (
@@ -74,8 +84,11 @@ const Menu = (props: MenuProps) => {
                 >
                   Login
                 </button>
-                <button className="btn btn-outline ml-2">
-                  Forgot password
+                <button
+                  className="btn btn-outline ml-2"
+                  onClick={() => signUp(email, password)}
+                >
+                  Sign up
                 </button>
               </div>
             </div>

@@ -3,6 +3,7 @@ export interface IElectronAPI {
   alertHelloWorld(message: string): unknown;
   loadPreferences: () => Promise<void>,
   pickLocation: () => Promise<string>;
+  handleSignUp: (email: string, password: string) => Promise<string>;
 }
 
 declare global {
