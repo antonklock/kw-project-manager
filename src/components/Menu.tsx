@@ -9,21 +9,6 @@ type MenuProps = {
   setView: (view: string) => void;
 };
 
-const supabaseSignUp = async (email: string, password: string) => {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-
-  if (error) {
-    console.log("Error: ", error);
-  }
-
-  if (data) {
-    console.log("Data: ", data);
-  }
-};
-
 const Menu = (props: MenuProps) => {
   const { setView } = props;
 
@@ -32,22 +17,12 @@ const Menu = (props: MenuProps) => {
     "login"
   );
 
-  let email: string;
-  let password: string;
-
-  const handleLogin = (email: string, password: string) => {
-    console.log("Login");
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-  };
-
-  const signUp = async (email: string, password: string) => {
+  const handleSwitchModalContent = () => {
     if (modalContent === "login") {
       setModalContent("signup");
     } else {
       setModalContent("login");
     }
-    // supabaseSignUp(email, password);
   };
 
   return (
@@ -78,20 +53,10 @@ const Menu = (props: MenuProps) => {
       <div className="modal">
         <div className="prose modal-box">
           <div className="modal-action">
-            {modalContent == "login" && (
-              <LoginModalContent
-                email={""}
-                password={""}
-                handleLogin={handleLogin}
-                signUp={signUp}
-              />
-            )}
+            {modalContent == "login" && <LoginModalContent />}
             {modalContent == "signup" && (
               <SignUpModalContent
-                email={""}
-                password={""}
-                handleLogin={handleLogin}
-                signUp={signUp}
+                handleSwitchModalContent={handleSwitchModalContent}
               />
             )}
           </div>

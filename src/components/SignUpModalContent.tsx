@@ -1,15 +1,33 @@
 import React from "react";
+import supabase from "../../lib/supabase";
 
 type SignUpModalContentProps = {
-  email: string;
-  password: string;
-  handleLogin: (email: string, password: string) => void;
-  signUp: (email: string, password: string) => void;
+  handleSwitchModalContent: () => void;
+};
+
+const supabaseSignUp = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    console.log("Error: ", error);
+  }
+
+  if (data) {
+    console.log("Data: ", data);
+  }
+};
+
+const handleSignUp = async (email: string, password: string) => {
+  supabaseSignUp(email, password);
 };
 
 export const SignUpModalContent = (props: SignUpModalContentProps) => {
-  const { handleLogin, signUp } = props;
-  let { email, password } = props;
+  const { handleSwitchModalContent } = props;
+  let email: string;
+  let password: string;
   return (
     <>
       <label
@@ -39,13 +57,13 @@ export const SignUpModalContent = (props: SignUpModalContentProps) => {
         <div className="flex flex-col pt-4">
           <button
             className="btn btn-info"
-            onClick={() => handleLogin(email, password)}
+            onClick={() => handleSignUp(email, password)}
           >
             Create new account
           </button>
           <p
-            className="text-blue-500 cursor-pointer mt-0"
-            onClick={() => signUp(email, password)}
+            className="text-blue-500 cursor-pointer"
+            onClick={handleSwitchModalContent}
           >
             Login
           </p>
