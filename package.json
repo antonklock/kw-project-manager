@@ -48,6 +48,7 @@
           "@electron-forge/plugin-webpack",
           {
             "mainConfig": "./webpack.main.config.js",
+            "devContentSecurityPolicy": "connect-src 'self' ws://localhost:3000 http://localhost:3000 https://yyqahamdtqrwhkidlxrj.supabase.co/auth/v1/signup",
             "renderer": {
               "config": "./webpack.renderer.config.js",
               "entryPoints": [

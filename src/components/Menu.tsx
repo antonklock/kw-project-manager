@@ -1,6 +1,7 @@
 import React from "react";
 // import MenuButtons from "./MenuButtons";
 import { UilSetting } from "@iconscout/react-unicons";
+import supabase from "../../lib/supabase";
 
 type MenuProps = {
   setView: (view: string) => void;
@@ -24,10 +25,24 @@ const Menu = (props: MenuProps) => {
     console.log("Sign Up");
     console.log("Email: " + email);
     console.log("Password: " + password);
-    window.electronAPI
-      .handleSignUp(email, password)
-      .then((result: string) => console.log(result))
-      .catch((error: string) => console.log(error));
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.log("Error: ", error);
+    }
+
+    if (data) {
+      console.log("Data: ", data);
+    }
+
+    // window.electronAPI
+    //   .handleSignUp(email, password)
+    //   .then((result: string) => console.log(result))
+    //   .catch((error: string) => console.log(error));
   };
 
   return (
