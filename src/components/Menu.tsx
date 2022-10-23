@@ -2,15 +2,35 @@ import React from "react";
 // import MenuButtons from "./MenuButtons";
 import { UilSetting } from "@iconscout/react-unicons";
 import supabase from "../../lib/supabase";
+import { LoginModalContent } from "./LoginModalContent";
+import { SignUpModalContent } from "./SignUpModalContent";
 
 type MenuProps = {
   setView: (view: string) => void;
+};
+
+const supabaseSignUp = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    console.log("Error: ", error);
+  }
+
+  if (data) {
+    console.log("Data: ", data);
+  }
 };
 
 const Menu = (props: MenuProps) => {
   const { setView } = props;
 
   const [signedIn, setSignedIn] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState<"login" | "signup">(
+    "login"
+  );
 
   let email: string;
   let password: string;
@@ -22,27 +42,12 @@ const Menu = (props: MenuProps) => {
   };
 
   const signUp = async (email: string, password: string) => {
-    console.log("Sign Up");
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.log("Error: ", error);
+    if (modalContent === "login") {
+      setModalContent("signup");
+    } else {
+      setModalContent("login");
     }
-
-    if (data) {
-      console.log("Data: ", data);
-    }
-
-    // window.electronAPI
-    //   .handleSignUp(email, password)
-    //   .then((result: string) => console.log(result))
-    //   .catch((error: string) => console.log(error));
+    // supabaseSignUp(email, password);
   };
 
   return (
@@ -65,51 +70,34 @@ const Menu = (props: MenuProps) => {
         </div>
       </div>
 
-      <input type="checkbox" id="login-modal" className="modal-toggle" />
-      <div className="modal cursor-pointer">
+      <input
+        type="checkbox"
+        id="login-modal"
+        className="modal-toggle cursor-pointer"
+      />
+      <div className="modal">
         <div className="prose modal-box">
           <div className="modal-action">
-            <label
-              htmlFor="login-modal"
-              className="btn btn-sm btn-circle absolute right-4 top-4"
-            >
-              ✕
-            </label>
-            <div className="w-full flex flex-col justify-center py-2 px-6">
-              <label>Email</label>
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                onChange={(e) => {
-                  email = e.target.value;
-                }}
-              ></input>
-              <label>Password</label>
-              <input
-                type="password"
-                className="input input-bordered w-full"
-                onChange={(e) => {
-                  password = e.target.value;
-                }}
-              ></input>
-              <div className="flex flex-row pt-8">
-                <button
-                  className="btn btn-info mr-2"
-                  onClick={() => handleLogin(email, password)}
-                >
-                  Login
-                </button>
-                <button
-                  className="btn btn-outline ml-2"
-                  onClick={() => signUp(email, password)}
-                >
-                  Sign up
-                </button>
-              </div>
-            </div>
+            {modalContent == "login" && (
+              <LoginModalContent
+                email={""}
+                password={""}
+                handleLogin={handleLogin}
+                signUp={signUp}
+              />
+            )}
+            {modalContent == "signup" && (
+              <SignUpModalContent
+                email={""}
+                password={""}
+                handleLogin={handleLogin}
+                signUp={signUp}
+              />
+            )}
           </div>
         </div>
       </div>
+
       {/* <div className="divider"></div>
       <MenuButtons setView={setView} /> */}
     </div>
