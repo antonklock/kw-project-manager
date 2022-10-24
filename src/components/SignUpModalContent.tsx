@@ -1,10 +1,6 @@
 import React from "react";
 import supabase from "../../lib/supabase";
 
-type SignUpModalContentProps = {
-  handleSwitchModalContent: () => void;
-};
-
 const supabaseSignUp = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -24,8 +20,7 @@ const handleSignUp = async (email: string, password: string) => {
   supabaseSignUp(email, password);
 };
 
-export const SignUpModalContent = (props: SignUpModalContentProps) => {
-  const { handleSwitchModalContent } = props;
+export const SignUpModalContent = () => {
   let email: string;
   let password: string;
   return (
@@ -55,18 +50,8 @@ export const SignUpModalContent = (props: SignUpModalContentProps) => {
           }}
         ></input>
         <div className="flex flex-col pt-4">
-          <button
-            className="btn btn-info"
-            onClick={() => handleSignUp(email, password)}
-          >
-            Create new account
-          </button>
-          <p
-            className="text-blue-500 cursor-pointer"
-            onClick={handleSwitchModalContent}
-          >
-            Login
-          </p>
+          <button className="btn btn-info">Create new account</button>
+          <p className="text-blue-500 cursor-pointer">Login</p>
         </div>
       </div>
     </>

@@ -1,32 +1,53 @@
-import { UserResponse } from "@supabase/supabase-js";
 import React, { useState, useEffect } from "react";
+import { User } from "@supabase/supabase-js";
 import supabase from "../../lib/supabase";
 
 export const LoginModalContent = () => {
-  const [user, setUser] = useState<UserResponse | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     checkUser();
-    window.addEventListener("hashchange", checkUser, false);
+    // window.addEventListener("hashchange", checkUser, false);
   }, []);
 
   const checkUser = async () => {
-    const user = await supabase.auth.getUser();
-    if (user) {
-      setUser(user);
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+      console.log(error);
+    }
+
+    if (data.user) {
+      console.log("data: ", data);
+      setUser(data.user);
+    } else {
+      console.log("no user");
+      setUser(null);
     }
   };
 
   const signInWithGithub = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-    if (error) {
-      console.log("Error: ", error);
+    // window.electronAPI.handleSignInWithGithub();
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: "github",
+      });
+    } catch (e) {
+      console.log("error", e);
+    } finally {
+      checkUser();
     }
+
+    // if (error) {
+    //   console.log("Error: ", error);
+    // }
+
+    // if (data) {
+    //   console.log("Data: ", data);
+    // }
   };
 
   const signOut = async () => {
+    console.log("signing out");
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.log("Error: ", error);
@@ -45,19 +66,19 @@ export const LoginModalContent = () => {
       </label>
 
       {user ? (
+        <>
+          <div className="flex flex-col pt-4">Hello {user?.email}</div>
+          <button className="btn btn-info" onClick={signOut}>
+            Signout
+          </button>
+        </>
+      ) : (
         <div className="w-full flex flex-col justify-center py-2 px-6">
           <div className="text-xl">Login with GitHub</div>
           <button className="btn btn-info" onClick={signInWithGithub}>
             Login
           </button>
         </div>
-      ) : (
-        <>
-          <div className="flex flex-col pt-4">Hello </div>
-          <button className="btn btn-info" onClick={signInWithGithub}>
-            Signout
-          </button>
-        </>
       )}
     </>
   );

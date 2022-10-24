@@ -8,4 +8,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
     pickLocation: () => ipcRenderer.invoke("pickLocation"),
     openLocation: (path: string) => ipcRenderer.send("openLocation", path),
     handleSignUp: (email: string, password: string) => ipcRenderer.invoke("handleSignUp", email, password),
+    handleSignInWithGithub: () => ipcRenderer.invoke("handleSignInWithGithub"),
 });

@@ -4,6 +4,7 @@ export interface IElectronAPI {
   loadPreferences: () => Promise<void>,
   pickLocation: () => Promise<string>;
   handleSignUp: (email: string, password: string) => Promise<string>;
+  handleSignInWithGithub: () => Promise<string>;
 }
 
 declare global {

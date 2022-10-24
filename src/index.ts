@@ -81,6 +81,17 @@ ipcMain.handle('handleSignUp', async (event: Electron.IpcMainEvent, email: strin
   }
 });
 
+ipcMain.handle('handleSignInWithGithub', async () => {
+  console.log('signInWithGihub');
+  const { error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+    if (error) {
+      console.log("Error: ", error);
+  }
+  return "success";
+});
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

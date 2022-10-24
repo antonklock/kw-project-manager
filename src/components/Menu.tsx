@@ -54,11 +54,7 @@ const Menu = (props: MenuProps) => {
         <div className="prose modal-box">
           <div className="modal-action">
             {modalContent == "login" && <LoginModalContent />}
-            {modalContent == "signup" && (
-              <SignUpModalContent
-                handleSwitchModalContent={handleSwitchModalContent}
-              />
-            )}
+            {modalContent == "signup" && <SignUpModalContent />}
           </div>
         </div>
       </div>
