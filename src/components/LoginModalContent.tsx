@@ -26,16 +26,16 @@ export const LoginModalContent = () => {
   };
 
   const signInWithGithub = async () => {
-    // window.electronAPI.handleSignInWithGithub();
-    try {
-      await supabase.auth.signInWithOAuth({
-        provider: "github",
-      });
-    } catch (e) {
-      console.log("error", e);
-    } finally {
-      checkUser();
-    }
+    window.electronAPI.handleSignInWithGithub();
+    // try {
+    //   await supabase.auth.signInWithOAuth({
+    //     provider: "github",
+    //   });
+    // } catch (e) {
+    //   console.log("error", e);
+    // } finally {
+    //   checkUser();
+    // }
 
     // if (error) {
     //   console.log("Error: ", error);

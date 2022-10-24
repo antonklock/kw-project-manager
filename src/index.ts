@@ -83,12 +83,18 @@ ipcMain.handle('handleSignUp', async (event: Electron.IpcMainEvent, email: strin
 
 ipcMain.handle('handleSignInWithGithub', async () => {
   console.log('signInWithGihub');
-  const { error } = await supabase.auth.signInWithOAuth({
+  const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
     });
     if (error) {
       console.log("Error: ", error);
+    }
+  if (data) {
+    console.log('data', data);
   }
+
+  shell.openExternal(data.url);
+
   return "success";
 });
 
