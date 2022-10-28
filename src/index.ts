@@ -28,16 +28,6 @@ const createWindow = (): void => {
       contextIsolation: true,
     },
   });
-
-// session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-//   callback({
-//     responseHeaders: {
-//       ...details.responseHeaders,
-//       'Content-Security-Policy': ['default-src \'self\' \'https://yyqahamdtqrwhkidlxrj.supabase.co/auth/v1/signup\' '],
-//     }
-//   })
-// })
-
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
@@ -83,17 +73,18 @@ ipcMain.handle('handleSignUp', async (event: Electron.IpcMainEvent, email: strin
 
 ipcMain.handle('handleSignInWithGithub', async () => {
   console.log('signInWithGihub');
-  const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-    if (error) {
-      console.log("Error: ", error);
-    }
-  if (data) {
-    console.log('data', data);
-  }
+  
+  // const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "github",
+  //   });
+  //   if (error) {
+  //     console.log("Error: ", error);
+  //   }
+  // if (data) {
+  //   console.log('data', data);
+  // }
 
-  shell.openExternal(data.url);
+  // shell.openExternal(data.url);
 
   return "success";
 });
