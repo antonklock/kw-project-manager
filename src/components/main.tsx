@@ -9,7 +9,7 @@ const Main = () => {
   const [view, setView] = useState("Projects");
   return (
     <>
-      <div className="flex p-5">
+      <div className="h-screen flex p-5">
         <Menu setView={setView} />
         <div className="divider divider-horizontal" />
         <div className="grow">

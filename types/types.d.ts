@@ -3,6 +3,8 @@ export interface IElectronAPI {
   alertHelloWorld(message: string): unknown;
   loadPreferences: () => Promise<void>,
   pickLocation: () => Promise<string>;
+  handleSignUp: (email: string, password: string) => Promise<string>;
+  handleSignInWithGithub: () => Promise<string>;
 }
 
 declare global {
@@ -10,7 +12,6 @@ declare global {
     electronAPI: IElectronAPI  
   }
   declare module "@iconscout/react-unicons";
-  // declare module "*";
 }
 
 export type Project = {

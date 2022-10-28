@@ -48,6 +48,7 @@
           "@electron-forge/plugin-webpack",
           {
             "mainConfig": "./webpack.main.config.js",
+            "devContentSecurityPolicy": "connect-src 'self' https://yyqahamdtqrwhkidlxrj.supabase.co/auth/v1/signup https://yyqahamdtqrwhkidlxrj.supabase.co/auth/v1/user",
             "renderer": {
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
@@ -94,6 +95,7 @@
     "@iconscout/react-unicons-solid": "^0.0.3",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
+    "@supabase/supabase-js": "^2.0.2",
     "@tailwindcss/typography": "^0.5.7",
     "autoprefixer": "^10.4.12",
     "daisyui": "^2.31.0",
