@@ -29,6 +29,8 @@ const createWindow = (): void => {
     },
   });
 
+  mainWindow.setMenuBarVisibility(false);
+
 // session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
 //   callback({
 //     responseHeaders: {
