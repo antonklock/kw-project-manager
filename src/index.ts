@@ -31,15 +31,6 @@ const createWindow = (): void => {
 
   mainWindow.setMenuBarVisibility(false);
 
-// session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-//   callback({
-//     responseHeaders: {
-//       ...details.responseHeaders,
-//       'Content-Security-Policy': ['default-src \'self\' \'https://yyqahamdtqrwhkidlxrj.supabase.co/auth/v1/signup\' '],
-//     }
-//   })
-// })
-
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
@@ -131,13 +122,6 @@ const handleAlertHelloWorld = () => {
   return path;
 }
 
-const handlePickLocation = () => {
-  return dialog.showOpenDialogSync({ properties: ['openDirectory'] }) || 'No folder selected';
-}
-
-// const handleSignUp = async (email:string, password:string) => {
-//   console.log("handleSignUp");
-//   console.log("email: " + email);
-//   console.log("password: " + password);
-//   return "success";
+// const handlePickLocation = () => {
+//   return dialog.showOpenDialogSync({ properties: ['openDirectory'] }) || 'No folder selected';
 // }
