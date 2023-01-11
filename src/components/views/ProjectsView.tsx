@@ -71,13 +71,13 @@ const ProjectsView = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-around bg-base-300 rounded-md mx-5 border-b border-info border-opacity-25">
+      {/* <div className="flex flex-row justify-around bg-base-300 rounded-md mx-5 border-b border-info border-opacity-25">
         <button className="btn btn-ghost rounded-none">Star</button>
         <button className="btn btn-ghost rounded-none">Name</button>
         <button className="btn btn-ghost rounded-none">Client</button>
         <button className="btn btn-ghost rounded-none">Path</button>
         <button className="btn btn-ghost rounded-none">Settings</button>
-      </div>
+      </div> */}
       <div className="projectItems">
         <ProjectItems
           projectItems={projectItems}
